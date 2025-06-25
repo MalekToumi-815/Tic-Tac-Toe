@@ -78,3 +78,92 @@ header {
     color: white;
     justify-self: center;
 }
+@keyframes draw-border {
+    from {
+        border-color: transparent;
+    }
+    to {
+        border-color: white;
+    }
+}
+main{
+    width: 100%;
+    display: flex;
+    justify-content: center
+}
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 0;
+    margin: 40px;
+}   
+
+.cell {
+    position: relative;
+    border: 2px solid transparent;
+    animation: draw-border 0.5s ease forwards;
+    background-color: transparent;
+    animation-delay: calc(var(--i) * 0.1s); 
+}
+
+/* Remove outer borders */
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+    border-bottom: none;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
+    border-left: none;
+}
+
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+    border-right: none;
+}
+
+/*X and O classes*/
+
+.cell.x::before,
+.cell.x::after {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 8px;
+    background: #e94141;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    border-radius: 4px;
+}
+
+.cell.x::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cell.x::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.cell.o::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 8px solid #0086f4;
+    border-radius: 50%;
+    background: transparent;
+}
