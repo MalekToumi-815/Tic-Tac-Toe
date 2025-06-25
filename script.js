@@ -27,7 +27,7 @@ const Gameboard = (function () {
     };
     const empty = (pos) => gameboard[pos] === ""
     return { playX, playO, reset, full, win, empty }
-})()
+})();
 function createPlayer (name) {
     return {name}
 }
@@ -59,4 +59,4 @@ const GameFlow = (function () {
         console.log(full ? "Tie" : (turn ? `${player2.name} won` : `${player1.name} won`))
     }
     return {play}
-})()
+})();
