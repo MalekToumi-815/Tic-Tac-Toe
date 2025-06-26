@@ -80,8 +80,18 @@ const GameFlow = (function () {
             win = Gameboard.win()
             full = Gameboard.full()
         }
-        if (win) console.log((turn ? "player2 won" : "player1 won"))
-        else if (full) console.log("Tie")
+        if (win) {
+            console.log((turn ? "player2 won" : "player1 won"))
+            document.getElementById("winnerMessage").innerText = "Congratulations!!";
+            document.querySelector("#winnerDialog p").innerText = turn ? `${player2.name} won!` : `${player1.name} won!`
+            document.getElementById("winnerDialog").showModal();            
+        }
+        else if (full) {
+            console.log("Tie")
+            document.getElementById("winnerMessage").innerText = "It's a tie!";
+            document.querySelector("#winnerDialog p").innerText = ""
+            document.getElementById("winnerDialog").showModal();
+        }
     })
     return {play , setplayers}
 })();

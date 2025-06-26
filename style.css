@@ -73,18 +73,10 @@ header {
     width: 2em;
 }
 #p1 , #p2 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: white;
     justify-self: center;
-}
-@keyframes draw-border {
-    from {
-        border-color: transparent;
-    }
-    to {
-        border-color: white;
-    }
 }
 main{
     width: 100%;
@@ -101,8 +93,7 @@ main{
 
 .cell {
     position: relative;
-    border: 2px solid transparent;
-    animation: draw-border 0.5s ease forwards;
+    border: 2px solid white;
     background-color: transparent;
     animation-delay: calc(var(--i) * 0.1s); 
 }
