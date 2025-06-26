@@ -31,32 +31,49 @@ const Gameboard = (function () {
 function createPlayer (name) {
     return {name}
 }
+const DisplayController = (function () {
+    let board = document.querySelector(".gameboard")
+    let cells = document.querySelectorAll(".cell")
+    const reset = () => {
+        cells.forEach(cell => {
+            if (cell.classList.contains("o")) cell.classList.remove("o")
+            if (cell.classList.contains("x")) cell.classList.remove("x")
+        })
+    }
+    const playX = (cell) => {cell.classList.add('x')}
+    const playO = (cell) => {cell.classList.add('o')}
+    return {board , playX , playO , reset}
+})();
 const GameFlow = (function () {
-    const play = (name1,name2) => {
+    const play = () => {
         let turn = true
         let win = false
         let full = false
         Gameboard.reset()
-        const player1 = createPlayer(name1)
-        const player2 = createPlayer(name2)
-        while (!win && !full) {
-            pos = Number(prompt())
+        DisplayController.reset()
+        DisplayController.board.addEventListener("click",(e) => {
+            if (win || full) return;
+            pos = e.target.dataset.index
             if (turn && Gameboard.empty(pos)){
                 Gameboard.playX(pos)
+                DisplayController.playX(e.target)
                 turn = false
-                console.log(player1.name+" "+pos)
+                console.log("player1 "+pos)
                 win = Gameboard.win()
                 full = Gameboard.full()
             }
             else if(!turn && Gameboard.empty(pos)){
                 Gameboard.playO(pos)
+                DisplayController.playO(e.target)
                 turn = true
-                console.log(player2.name+" "+pos)
+                console.log("player2+ "+pos)
                 win = Gameboard.win()
                 full = Gameboard.full()
             }
-        }
-        console.log(full ? "Tie" : (turn ? `${player2.name} won` : `${player1.name} won`))
+            if (full) console.log("Tie")
+            else if (win) console.log((turn ? "player2 won" : "player1 won"))
+        })
     }
     return {play}
 })();
+GameFlow.play()
