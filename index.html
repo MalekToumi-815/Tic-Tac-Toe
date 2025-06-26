@@ -14,11 +14,11 @@
             <h1>Tic-Tac-Toe Battle</h1>
         </div>
         <div id="controls">
-            <button class="control-button"><img src="src/change.svg" alt="change" class="icon"> Change Players</button>
-            <button class="control-button"><img src="src/replay.svg" alt="replay" class="icon"> Replay</button>
+            <button class="control-button" onclick="dialog.showModal()"><img src="src/change.svg" alt="change" class="icon"> Change Players</button>
+            <button class="control-button" onclick="GameFlow.play()"><img src="src/replay.svg" alt="replay" class="icon"> Replay</button>
         </div>
-        <div id="player1">player 1</div>
-        <div id="player2">player 2</div>
+        <div id="p1"></div>
+        <div id="p2"></div>
     </header>
     <main>
         <div class="gameboard">
@@ -33,5 +33,20 @@
             <div class="cell" data-index="8" style="--i:8"></div>
         </div>
     </main>
+    <dialog id="nameDialog">
+        <form method="dialog" id="playerForm">
+        <h2>Enter Player Names</h2>
+
+        <label for="player1">Player 1 (X)</label>
+        <input type="text" id="player1" name="player1" required placeholder="Player 1 name">
+
+        <label for="player2">Player 2 (O)</label>
+        <input type="text" id="player2" name="player2" required placeholder="Player 2 name">
+
+        <div class="dialog-buttons">
+            <button type="submit">Start Game</button>
+        </div>
+    </form>
+    </dialog>
 </body>
 </html>

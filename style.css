@@ -72,7 +72,7 @@ header {
     height: 2em;
     width: 2em;
 }
-#player1 , #player2 {
+#p1 , #p2 {
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
@@ -166,4 +166,65 @@ main{
     border: 8px solid #0086f4;
     border-radius: 50%;
     background: transparent;
+}
+
+/*dialog styles*/
+dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    border: none;
+    border-radius: 12px;
+    padding: 30px 25px;
+    background: #2d3436;
+    color: #fff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 320px;
+    text-align: center;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+dialog h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+dialog label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: 500;
+}
+
+dialog input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.dialog-buttons button {
+    background-color: #0984e3;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dialog-buttons button:hover {
+    background-color: #74b9ff;
 }

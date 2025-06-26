@@ -45,35 +45,62 @@ const DisplayController = (function () {
     return {board , playX , playO , reset}
 })();
 const GameFlow = (function () {
-    const play = () => {
         let turn = true
         let win = false
         let full = false
+    let player1 
+    let player2 
+    const setplayers = (p1,p2) => {
+        player1 = p1
+        player2 = p2
+    }
+    const play = () => {
+        turn = true
+        win = false
+        full = false
         Gameboard.reset()
         DisplayController.reset()
-        DisplayController.board.addEventListener("click",(e) => {
-            if (win || full) return;
-            pos = e.target.dataset.index
-            if (turn && Gameboard.empty(pos)){
-                Gameboard.playX(pos)
-                DisplayController.playX(e.target)
-                turn = false
-                console.log("player1 "+pos)
-                win = Gameboard.win()
-                full = Gameboard.full()
-            }
-            else if(!turn && Gameboard.empty(pos)){
-                Gameboard.playO(pos)
-                DisplayController.playO(e.target)
-                turn = true
-                console.log("player2+ "+pos)
-                win = Gameboard.win()
-                full = Gameboard.full()
-            }
-            if (full) console.log("Tie")
-            else if (win) console.log((turn ? "player2 won" : "player1 won"))
-        })
     }
-    return {play}
+    DisplayController.board.addEventListener("click",(e) => {
+        if (win || full) return;
+        pos = e.target.dataset.index
+        if (turn && Gameboard.empty(pos)){
+            Gameboard.playX(pos)
+            DisplayController.playX(e.target)
+            turn = false
+            console.log(player1.name+pos)
+            win = Gameboard.win()
+            full = Gameboard.full()
+        }
+        else if(!turn && Gameboard.empty(pos)){
+            Gameboard.playO(pos)
+            DisplayController.playO(e.target)
+            turn = true
+            console.log(player2.name+pos)
+            win = Gameboard.win()
+            full = Gameboard.full()
+        }
+        if (win) console.log((turn ? "player2 won" : "player1 won"))
+        else if (full) console.log("Tie")
+    })
+    return {play , setplayers}
 })();
-GameFlow.play()
+// Dialog logic
+const dialog = document.querySelector("#nameDialog")
+const form = document.querySelector("#playerForm")
+dialog.showModal();
+
+form.addEventListener("submit", () => {
+    const player1 = document.getElementById("player1").value.trim();
+    const player2 = document.getElementById("player2").value.trim();
+
+    document.getElementById("p1").innerText = player1
+    document.getElementById("p2").innerText = player2
+
+    console.log("Player 1:", player1);
+    console.log("Player 2:", player2);
+
+    GameFlow.setplayers(createPlayer(player1),createPlayer(player2))        
+    GameFlow.play()
+    
+});
